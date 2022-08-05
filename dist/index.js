@@ -73,7 +73,7 @@ function run() {
                 trimWhitespace: true,
             });
             const setToState = core.getInput("set-to-state", {
-                trimWhitespace: true,
+                trimWhitespace: false,
             });
             const dontSetStateWhilePrsOpen = core.getBooleanInput("dont-set-state-while-prs-open");
             const addPullRequestLink = core.getBooleanInput("add-pr-link");
@@ -95,11 +95,15 @@ function run() {
                 const branchName = prResponse.data.head.ref;
                 const title = prResponse.data.title;
                 const description = (_a = prResponse.data.body) !== null && _a !== void 0 ? _a : "";
+                // Print statements for debugging
+                console.log(branchName);
+                console.log(title);
+                console.log(description);
                 // Match from title
                 console.log("Try matching work item id from title ...");
                 let regResult = title.match(rExp);
-                if (null !== regResult && regResult.length >= 2) {
-                    workItemId = parseInt(regResult[1]);
+                if (null !== regResult && regResult[0].length >= 2) {
+                    workItemId = parseInt(regResult[0]);
                     console.log(`... success! Work item id = ${workItemId}`);
                 }
                 else {
@@ -109,8 +113,8 @@ function run() {
                 if (null === workItemId) {
                     console.log("Try matching work item id from description ...");
                     regResult = description.match(rExp);
-                    if (null !== regResult && regResult.length >= 2) {
-                        workItemId = parseInt(regResult[1]);
+                    if (null !== regResult && regResult[0].length >= 2) {
+                        workItemId = parseInt(regResult[0]);
                         console.log(`... success! Work item id = ${workItemId}`);
                     }
                     else {
@@ -121,8 +125,8 @@ function run() {
                 if (null === workItemId) {
                     console.log("Try matching work item id from branch name ...");
                     regResult = branchName.match(rExp);
-                    if (null !== regResult && regResult.length >= 2) {
-                        workItemId = parseInt(regResult[1]);
+                    if (null !== regResult && regResult[0].length >= 2) {
+                        workItemId = parseInt(regResult[0]);
                         console.log(`... success! Work item id = ${workItemId}`);
                     }
                     else {
@@ -135,8 +139,8 @@ function run() {
                 const commitMessage = github.context.payload.head_commit.message;
                 console.log("Try matching work item id from commit message ...");
                 let regResult = commitMessage.match(rExp);
-                if (null !== regResult && regResult.length >= 2) {
-                    workItemId = parseInt(regResult[1]);
+                if (null !== regResult && regResult[0].length >= 2) {
+                    workItemId = parseInt(regResult[0]);
                     console.log(`... success! Work item id = ${workItemId}`);
                 }
                 else {

@@ -102,6 +102,7 @@ function run() {
                 // Match from title
                 console.log("Try matching work item id from title ...");
                 let regResult = title.match(rExp);
+                console.log(regResult);
                 if (null !== regResult && regResult[0].length >= 2) {
                     workItemId = parseInt(regResult[0]);
                     console.log(`... success! Work item id = ${workItemId}`);
@@ -113,6 +114,7 @@ function run() {
                 if (null === workItemId) {
                     console.log("Try matching work item id from description ...");
                     regResult = description.match(rExp);
+                    console.log(regResult);
                     if (null !== regResult && regResult[0].length >= 2) {
                         workItemId = parseInt(regResult[0]);
                         console.log(`... success! Work item id = ${workItemId}`);
@@ -125,6 +127,7 @@ function run() {
                 if (null === workItemId) {
                     console.log("Try matching work item id from branch name ...");
                     regResult = branchName.match(rExp);
+                    console.log(regResult);
                     if (null !== regResult && regResult[0].length >= 2) {
                         workItemId = parseInt(regResult[0]);
                         console.log(`... success! Work item id = ${workItemId}`);

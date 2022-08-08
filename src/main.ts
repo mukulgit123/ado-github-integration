@@ -66,7 +66,12 @@ export async function run() {
       const branchName = prResponse.data.head.ref;
       const title = prResponse.data.title;
       const description = prResponse.data.body ?? "";
+      
 
+      // Print for Regex debugging
+
+      console.log(devOpsIdRegex);
+      console.log(rExp);
       // Print statements for debugging
       console.log(branchName);
       console.log(title);

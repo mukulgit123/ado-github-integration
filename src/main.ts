@@ -66,11 +66,11 @@ export async function run() {
       const branchName = prResponse.data.head.ref;
       const title = prResponse.data.title;
       const description = prResponse.data.body ?? "";
-      
+
       // Print statements for debugging
-      console.log(branchName)
-      console.log(title)
-      console.log(description)
+      console.log(branchName);
+      console.log(title);
+      console.log(description);
 
       // Match from title
       console.log("Try matching work item id from title ...");

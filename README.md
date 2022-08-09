@@ -18,11 +18,13 @@ jobs:
       - name: "Update DevOps Work Item"
         uses: mukulgit123/ado-github-integration@v1
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          devops-work-item-regex: "[a-zA-Z0-9]*/([0-9]+)_.*" # Regex which gets applied to title, body and branch name
+          repo-token: ${{ secrets.YOUR_GITHUB_TOKEN }} # This will need to be stored in Github secrets
+          devops-work-item-regex: "[0-9]+" # Regex which gets applied to title, body and branch name
                                                              # (in this order) to find the DevOps Work Item Id (only 
                                                              # first match gets used)
-          set-to-state: "" # The state you want the work item to be set to (exact string match). Keep empty to skip.
+                                                             # The action automatically converts it to /[0-9]+/ or the
+                                                             # desired regex used by match function
+          set-to-state: "" # The state you want the work item to be set to (exact string match) e.g. In progress Keep empty to skip.
           dont-set-state-while-prs-open: false # Set to true if you don't want to set the state while GitHub PRs 
                                                # associated with the DevOps Work Item are still open
           add-pr-link: true # Wheather you want to add the PR to DevOps (requires GitHub Integration into DevOps and 
@@ -36,6 +38,7 @@ jobs:
                                                 # - "Full Access" to link the PR to the work item (currently there is 
                                                 #    no specific right to only allow this, it only works with full 
                                                 #    access. Be careful who you give this token!)
+                                                # This will need to be stored in Github Secrets
           fail-on-error: true # If you don't want the action to fail (and create failed checks) on error (e.g. when 
                               # the work item id couldn't be found via the regex or an unforseen error occurs) set
                               # this to false. Setting this to false will also allow partial completion (e.g. only 

@@ -66,21 +66,10 @@ export async function run() {
       const branchName = prResponse.data.head.ref;
       const title = prResponse.data.title;
       const description = prResponse.data.body ?? "";
-      
-
-      // Print for Regex debugging
-
-      console.log(devOpsIdRegex);
-      console.log(rExp);
-      // Print statements for debugging
-      console.log(branchName);
-      console.log(title);
-      console.log(description);
 
       // Match from title
       console.log("Try matching work item id from title ...");
       let regResult = title.match(rExp);
-      console.log(regResult);
       if (null !== regResult && regResult[0].length >= 2) {
         workItemId = parseInt(regResult[0]);
         console.log(`... success! Work item id = ${workItemId}`);
@@ -92,7 +81,6 @@ export async function run() {
       if (null === workItemId) {
         console.log("Try matching work item id from description ...");
         regResult = description.match(rExp);
-        console.log(regResult);
         if (null !== regResult && regResult[0].length >= 2) {
           workItemId = parseInt(regResult[0]);
           console.log(`... success! Work item id = ${workItemId}`);
@@ -105,7 +93,6 @@ export async function run() {
       if (null === workItemId) {
         console.log("Try matching work item id from branch name ...");
         regResult = branchName.match(rExp);
-        console.log(regResult);
         if (null !== regResult && regResult[0].length >= 2) {
           workItemId = parseInt(regResult[0]);
           console.log(`... success! Work item id = ${workItemId}`);
